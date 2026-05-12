@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Seamless Video</title>
-
+<title> test1 </title>
+    
 <style>
 html, body {
     margin: 0;
@@ -24,7 +24,7 @@ video {
 
     object-fit: cover;
 
-    transition: opacity 0.05s linear;
+    transition: opacity 0.03s linear;
 }
 </style>
 </head>
@@ -49,36 +49,43 @@ video {
 const a = document.getElementById("a");
 const b = document.getElementById("b");
 
-// B 미리 버퍼
+let switched = false;
+
+// B 미리 로드
 b.load();
 
-// A 끝나기 전에 B
-a.addEventListener("timeupdate", async () => {
-    // 끝나기 0.15초 전?
-    if (a.duration - a.currentTime < 0.15) 
-        
-        if (b.dataset.started) return;
-        b.dataset.started = "1";
+const interval = setInterval(async function () {
+
+    if (switched) return;
+
+    if (
+        a.duration &&
+        (a.duration - a.currentTime) <= 0.033
+    ) {
+
+        switched = true;
 
         try {
-            // B 시작
+
             await b.play();
 
-            // 화면 전환
             b.style.opacity = "1";
             a.style.opacity = "0";
 
-            setTimeout(() => {
+            setTimeout(function () {
                 a.pause();
                 a.removeAttribute("src");
                 a.load();
-            }, 100);
+            }, 50);
+
+            clearInterval(interval);
 
         } catch (e) {
             console.error(e);
         }
     }
-});
+
+}, 5);
 </script>
 
 </body>
