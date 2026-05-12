@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Video Loop</title>
+
+    <!-- B preload -->
+    <link rel="preload"
+          as="video"
+          href="440dbf4c-2753-41cd-9d7d-9492f779d3ff.webm">
+
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<video id="video"
+       autoplay
+       muted
+       playsinline
+       preload="auto"></video>
+
+<script>
+const video = document.getElementById("video");
+
+const intro =
+    "33418281-0697-4d4e-bcfb-02916b3e57df.webm";
+
+const loop =
+    "440dbf4c-2753-41cd-9d7d-9492f779d3ff.webm";
+
+// play A
+video.src = intro;
+
+// B roop
+video.addEventListener("ended", async () => {
+    video.src = loop;
+    video.loop = true;
+
+    try {
+        await video.play();
+    } catch (err) {
+        console.error(err);
+    }
+});
+</script>
+
+</body>
+</html>
