@@ -51,13 +51,13 @@ const b = document.getElementById("b");
 
 let switched = false;
 
-// B 미리 로드
+// B preload
 b.load();
 
 const interval = setInterval(async function () {
 
     if (switched) return;
-
+    
     if (
         a.duration &&
         (a.duration - a.currentTime) <= 0.033
