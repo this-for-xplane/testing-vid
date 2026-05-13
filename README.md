@@ -1,2 +1,6 @@
 # testing-vid
-ㅇ
+
+
+no money
+brought from 
+https://ba.svdex.moe/jp/live2d
